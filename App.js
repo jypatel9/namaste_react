@@ -1,3 +1,6 @@
+import React from "react"
+import ReactDOM  from "react-dom/client";
+
 const treeOfParent = React.createElement(
   "div",
   { id: "parent" },
@@ -12,12 +15,8 @@ const siblingStructure = React.createElement(
   "div",
   { id: "parent" },[
   React.createElement("div", { id: "child" }, [
-    React.createElement("h1", { id: "heading1" }, "Hello World From React!"),
-    React.createElement("h1", { id: "heading2" }, "Hello World From Sibling!")
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", { id: "heading1" }, "Hello World Sibling 1 From React!"),
-    React.createElement("h1", { id: "heading2" }, "Hello World Sibling 1 From Sibling!")
+    React.createElement("h1", { id: "heading1" }, "Namaste React 🚀!"),
+    React.createElement("h1", { id: "heading2" }, "By Jay Desai")
   ])
 ]
 );
@@ -28,7 +27,7 @@ const heading = React.createElement(
   "Hello World From React!"
 );
 
-console.log(siblingStructure);
+// console.log(siblingStructure);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

@@ -1,59 +1,1693 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// const heading = React.createElement("h1", { id: "heading" }, "Hello Jay");
+/** 
 
-// jsx is javascript syntax for creating react element
-// jsx is like a convention when we kind merge for html and js together
+*Header
+   *Logo
+   *Nav Item
 
-// jsx - is not html in JS
-// JSX - HTML - like syntax or xml-like syntax
-//JSX (transpiled before it reaches the JS) - PARCEL - Babel
+*Body
+   * - search
+   * - RestaurantContainer
+   *  - RestaurantCard
+   *    - Img
+   *    - Name of res, star rating, cuisines, delivery-time
+   
+*Footer
+     * - copyright
+     * - links
+     * - Address
+     * - Contact
 
-// JSX = React.createElement => ReactElement - JSObject => HTMLElement(render)
+*/
 
-const TitleComponent = () => {
+const Header = () => {
   return (
-    <h1 className="head" tabIndex="5">
-      Namaste React Using JSX
-    </h1>
-  );
-};
-
-//Functional Component
-//1.  a function return some peace of jsx code it's functional component
-//2. a function which return react element
-
-const number = 1000;
-
-const HeadingComponent1 = () => {
-  return (
-    <div className="container">
-      {TitleComponent()}
-      <TitleComponent />
-      <TitleComponent></TitleComponent>
-      <h1 className="heading">Namaste React Functional Component🚀</h1>
+    <div className="header">
+      <div className="logo-container">
+        <img
+          className="logo"
+          src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png"
+        ></img>
+      </div>
+      <div className="nav-item">
+        <ul>
+          <li>Home</li>
+          <li>About Us</li>
+          <li>Contact Us</li>
+          <li>Cart</li>
+        </ul>
+      </div>
     </div>
   );
 };
 
-//React-Fragment - behave like an empty tag
-// JSX don't allowed multiple root element in we can have only one root element and inside that whatever
+const styleCard = {
+  backgroundColor: "#f0f0f0",
+};
 
-const HeadingComponent = () => {
+const RestaurantCard = (props) => {
+  const { resData } = props;
+
+  const {
+    cloudinaryImageId,
+    name,
+    cuisines,
+    avgRating,
+    costForTwo,
+    deliveryTime,
+  } = resData?.data;
+
   return (
-    // <React.Fragment>
-    <>
-      <div className="container">
-        <TitleComponent />
-        <h1 className="heading">Namaste React Functional Component🚀</h1>
+    <div className="res-card" style={styleCard}>
+      <img
+        className="res-logo"
+        alt="res-logo"
+        src={
+          "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          resData.data.cloudinaryImageId
+        }
+      />
+      <h3>{name}</h3>
+      <h4>{cuisines.join(", ")}</h4>
+      <h4>{avgRating} stars</h4>
+      <h4>₹{costForTwo / 100} For Two</h4>
+      <h4>{deliveryTime} minutes</h4>
+    </div>
+  );
+};
+
+/* 
+  props :- props is nothing but just the properties which is pass to in the component for rendiering dynamically
+  also known as props is nothing just the funstions arguments
+
+  syntax : fun_name = (props) => {h1{{props.hello}}}
+
+*/
+
+const resList = [
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "9912",
+      name: "Fresh Pressery Cafe",
+      uuid: "caf6bd94-97ec-4845-830b-54ee6615020a",
+      city: "1",
+      area: "Koramangala",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "219782505fb37712366ea9051ab6bd2a",
+      cuisines: [
+        "Continental",
+        "Italian",
+        "Salads",
+        "Pastas",
+        "Beverages",
+        "Pizzas",
+        "Snacks",
+        "American",
+        "Healthy Food",
+        "Desserts",
+      ],
+      tags: [],
+      costForTwo: 40000,
+      costForTwoString: "₹400 FOR TWO",
+      deliveryTime: 18,
+      minDeliveryTime: 18,
+      maxDeliveryTime: 18,
+      slaString: "18 MINS",
+      lastMileTravel: 0.4000000059604645,
+      slugs: {
+        restaurant: "fresh-pressery-cafe-koramangla-koramangala",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "98/A, 17th B Main, Opposite China Pearl, Koramangala 5th Block, Bangalore",
+      locality: "Koramangala",
+      parentId: 1405,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      ribbon: [
+        {
+          type: "PROMOTED",
+        },
+      ],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 2700,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 2700,
+        message: "",
+        title: "Delivery Charge",
+        amount: "2700",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID:
+        "cid=7491950~p=1~eid=00000189-5d1c-10ba-0f1b-20b900e9010f~srvts=1689484267706",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "0.4 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "15% OFF",
+        subHeader: "UPTO ₹45",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "9912",
+        deliveryTime: 18,
+        minDeliveryTime: 18,
+        maxDeliveryTime: 18,
+        lastMileTravel: 0.4000000059604645,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: true,
+      avgRating: "4.3",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "201224",
+      name: "Asha tiffins",
+      uuid: "e32381cf-6468-4c10-9bad-47fa08e898a8",
+      city: "1",
+      area: "HSR Layout",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "n15vckntsiboiod3gpco",
+      cuisines: ["Indian", "South Indian", "Beverages"],
+      tags: [],
+      costForTwo: 20000,
+      costForTwoString: "₹200 FOR TWO",
+      deliveryTime: 27,
+      minDeliveryTime: 27,
+      maxDeliveryTime: 27,
+      slaString: "27 MINS",
+      lastMileTravel: 4,
+      slugs: {
+        restaurant: "asha-tiffins-hsr-hsr-2",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "Asha Tiffins, 5th Main Road, Sector 7, HSR Layout, Bengaluru, Karnataka, India",
+      locality: "7th Sector",
+      parentId: 236243,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 3900,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 3900,
+        message: "",
+        title: "Delivery Charge",
+        amount: "3900",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "4 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "30% OFF",
+        subHeader: "UPTO ₹70",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "201224",
+        deliveryTime: 27,
+        minDeliveryTime: 27,
+        maxDeliveryTime: 27,
+        lastMileTravel: 4,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.4",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "118278",
+      name: "Namaste",
+      uuid: "55394489-ff7d-4a73-bcca-35ebc0eb5783",
+      city: "1",
+      area: "2nd Stage",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "wya5kg7wxvbh5opfpo1m",
+      cuisines: [
+        "South Indian",
+        "Thalis",
+        "Snacks",
+        "Biryani",
+        "Indian",
+        "Chinese",
+        "Desserts",
+        "Beverages",
+      ],
+      tags: [],
+      costForTwo: 10000,
+      costForTwoString: "₹100 FOR TWO",
+      deliveryTime: 24,
+      minDeliveryTime: 24,
+      maxDeliveryTime: 24,
+      slaString: "24 MINS",
+      lastMileTravel: 4.199999809265137,
+      slugs: {
+        restaurant: "namaste-btm",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address: "69, 7th Main Road, BTM 2nd Stage, Bangalore - 76",
+      locality: "BTM Layout",
+      parentId: 366271,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 3900,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 3900,
+        message: "",
+        title: "Delivery Charge",
+        amount: "3900",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "4.1 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "50% OFF",
+        subHeader: "UPTO ₹100",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "118278",
+        deliveryTime: 24,
+        minDeliveryTime: 24,
+        maxDeliveryTime: 24,
+        lastMileTravel: 4.199999809265137,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.2",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "59234",
+      name: "Ramji Chaiwale",
+      uuid: "9093a876-d378-42d5-872e-e278559e89dc",
+      city: "1",
+      area: "Ashok Nagar",
+      totalRatingsString: "1000+ ratings",
+      cloudinaryImageId: "pgs8vd3skpvt17vscltz",
+      cuisines: ["Fast Food", "Punjabi", "Desserts"],
+      tags: [],
+      costForTwo: 10000,
+      costForTwoString: "₹100 FOR TWO",
+      deliveryTime: 32,
+      minDeliveryTime: 32,
+      maxDeliveryTime: 32,
+      slaString: "32 MINS",
+      lastMileTravel: 5.900000095367432,
+      slugs: {
+        restaurant: "ramji-chaiwale-cbd-central-bangalore",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "B11, Ground Floor , Devatha Plaza, 131 Residency Road, Srinivas Nagar, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka 560025",
+      locality: "Residency Road",
+      parentId: 4216,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      ribbon: [
+        {
+          type: "PROMOTED",
+        },
+      ],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID:
+        "cid=7495899~p=4~eid=00000189-5d1c-10ba-0f1b-20ba00e90416~srvts=1689484267706",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5.9 kms",
+      hasSurge: false,
+      sla: {
+        restaurantId: "59234",
+        deliveryTime: 32,
+        minDeliveryTime: 32,
+        maxDeliveryTime: 32,
+        lastMileTravel: 5.900000095367432,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: true,
+      avgRating: "4.3",
+      totalRatings: 1000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "685759",
+      name: "The Rameshwaram Cafe",
+      uuid: "fdb239ce-4023-40fa-8720-5321c236e64b",
+      city: "1",
+      area: "J P Nagar",
+      totalRatingsString: "1000+ ratings",
+      cloudinaryImageId: "c9b36413c755d072ec34619ee585bef4",
+      cuisines: ["South Indian"],
+      tags: [],
+      costForTwo: 25000,
+      costForTwoString: "₹250 FOR TWO",
+      deliveryTime: 57,
+      minDeliveryTime: 57,
+      maxDeliveryTime: 57,
+      slaString: "57 MINS",
+      lastMileTravel: 6.800000190734863,
+      slugs: {
+        restaurant: "the-rameshwaram-cafe-jp-nagar-jp-nagar",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "52, Outer Ring Rd, Jeewan Griha Colony, 2nd Phase, J. P. Nagar, Bengaluru, Karnataka 560078",
+      locality: "Jeewan Griha Colony",
+      parentId: 384316,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 5100,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 5100,
+        message: "",
+        title: "Delivery Charge",
+        amount: "5100",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 1,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "6.8 kms",
+      hasSurge: false,
+      sla: {
+        restaurantId: "685759",
+        deliveryTime: 57,
+        minDeliveryTime: 57,
+        maxDeliveryTime: 57,
+        lastMileTravel: 6.800000190734863,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "IT_IS_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.5",
+      totalRatings: 1000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "107476",
+      name: "Davanagere Benne Dose",
+      uuid: "0843868d-938f-4a52-9830-d872172f7d22",
+      city: "1",
+      area: "Jayanagar",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "qz6bnyiainw6carl2vei",
+      cuisines: ["South Indian"],
+      tags: [],
+      costForTwo: 15000,
+      costForTwoString: "₹150 FOR TWO",
+      deliveryTime: 35,
+      minDeliveryTime: 35,
+      maxDeliveryTime: 35,
+      slaString: "35 MINS",
+      lastMileTravel: 5,
+      slugs: {
+        restaurant: "davanagere-benne-dosa-jayanagar",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "#20/2, 26th main road, puttenapalya( opp ganesha temple) jayanagar 9th block, bangalore",
+      locality: "9th Block",
+      parentId: 399029,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "30% OFF",
+        subHeader: "UPTO ₹75",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "107476",
+        deliveryTime: 35,
+        minDeliveryTime: 35,
+        maxDeliveryTime: 35,
+        lastMileTravel: 5,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.2",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "209207",
+      name: "Prezzed Juicery",
+      uuid: "62bb23f0-348e-47fa-a892-b6e133937762",
+      city: "1",
+      area: "Koramangala",
+      totalRatingsString: "1000+ ratings",
+      cloudinaryImageId: "vyaguxl8ayzi3v5le1it",
+      cuisines: ["Juices", "Healthy Food"],
+      tags: [],
+      costForTwo: 25000,
+      costForTwoString: "₹250 FOR TWO",
+      deliveryTime: 42,
+      minDeliveryTime: 42,
+      maxDeliveryTime: 42,
+      slaString: "42 MINS",
+      lastMileTravel: 1.600000023841858,
+      slugs: {
+        restaurant: "prezzed-juicery-koramangala-koramangala",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "Prezzed Juicery 1st Block Koramangala Bengaluru Karnataka India",
+      locality: "1st Block",
+      parentId: 21231,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      ribbon: [
+        {
+          type: "PROMOTED",
+        },
+      ],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 2700,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 2700,
+        message: "",
+        title: "Delivery Charge",
+        amount: "2700",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID:
+        "cid=7491959~p=7~eid=00000189-5d1c-10ba-0f1b-20bb00e90735~srvts=1689484267706",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "1.6 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "15% OFF",
+        subHeader: "ABOVE ₹1000",
+        discountTag: "FLAT DEAL",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "209207",
+        deliveryTime: 42,
+        minDeliveryTime: 42,
+        maxDeliveryTime: 42,
+        lastMileTravel: 1.600000023841858,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: true,
+      avgRating: "4.6",
+      totalRatings: 1000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "34301",
+      name: "Sri Udupi Park (100ft Road)",
+      uuid: "82e5a42b-6a2d-45c7-a096-320333bd6c4e",
+      city: "1",
+      area: "Indiranagar",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "jxp8y1chnqljwqylpkov",
+      cuisines: [
+        "South Indian",
+        "North Indian",
+        "Chaat",
+        "Beverages",
+        "Chinese",
+      ],
+      tags: [],
+      costForTwo: 10000,
+      costForTwoString: "₹100 FOR TWO",
+      deliveryTime: 39,
+      minDeliveryTime: 39,
+      maxDeliveryTime: 39,
+      slaString: "39 MINS",
+      lastMileTravel: 6.300000190734863,
+      slugs: {
+        restaurant: "sri-udupi-park-indiranagar-indiranagar",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "#273 100 FEET ROAD DIFFENCE COLONY 6TH MAIN INDIRANAGAR BANGALORE-38",
+      locality: "Defence Colony",
+      parentId: 194697,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 5100,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 5100,
+        message: "",
+        title: "Delivery Charge",
+        amount: "5100",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 1,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "6.3 kms",
+      hasSurge: false,
+      sla: {
+        restaurantId: "34301",
+        deliveryTime: 39,
+        minDeliveryTime: 39,
+        maxDeliveryTime: 39,
+        lastMileTravel: 6.300000190734863,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "IT_IS_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.3",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "52307",
+      name: "Sri Udupi Park",
+      uuid: "e78cb731-9fd6-44b4-be6e-00b824fe7ba9",
+      city: "1",
+      area: "Indiranagar",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "cf1d1udfrwtihs08sro2",
+      cuisines: [
+        "South Indian",
+        "Chaat",
+        "North Indian",
+        "Beverages",
+        "Chinese",
+      ],
+      tags: [],
+      costForTwo: 15000,
+      costForTwoString: "₹150 FOR TWO",
+      deliveryTime: 32,
+      minDeliveryTime: 32,
+      maxDeliveryTime: 32,
+      slaString: "32 MINS",
+      lastMileTravel: 5,
+      slugs: {
+        restaurant: "sri-udupi-park-indiranagar-indiranagar-3",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "#53, beside leela palace, opp to manipal hospital, kodihalli, old airport road Bangalore - 560008",
+      locality: "Old Airport Road",
+      parentId: 4284,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "₹75 OFF",
+        subHeader: "ABOVE ₹299",
+        discountTag: "FLAT DEAL",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "52307",
+        deliveryTime: 32,
+        minDeliveryTime: 32,
+        maxDeliveryTime: 32,
+        lastMileTravel: 5,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.1",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "24990",
+      name: "Bhartiya Jalpan",
+      uuid: "bc791824-ab39-44ae-8b4c-3d1f9a781604",
+      city: "1",
+      area: "Indiranagar",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "cjwrgp1gmeu2nn5bcbyy",
+      cuisines: ["North Indian", "Sweets", "Desserts", "Chaat"],
+      tags: [],
+      costForTwo: 30000,
+      costForTwoString: "₹300 FOR TWO",
+      deliveryTime: 35,
+      minDeliveryTime: 35,
+      maxDeliveryTime: 35,
+      slaString: "35 MINS",
+      lastMileTravel: 5,
+      slugs: {
+        restaurant: "bhartiya-jalpan-indiranagar-indiranagar",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "1138, 13th main corner , 100 ft road, Indiranagar, Bengaluru-560038",
+      locality: "100 Feet Road",
+      parentId: 7518,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      ribbon: [
+        {
+          type: "PROMOTED",
+        },
+      ],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID:
+        "cid=7480838~p=10~eid=00000189-5d1c-10ba-0f1b-20bc00e90a43~srvts=1689484267706",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+        subHeader: "UPTO ₹50",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "24990",
+        deliveryTime: 35,
+        minDeliveryTime: 35,
+        maxDeliveryTime: 35,
+        lastMileTravel: 5,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: true,
+      avgRating: "4.1",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "674334",
+      name: "Pasta & Pizza",
+      uuid: "3d8cba84-bcc3-49d9-8615-2f79cbfcd232",
+      city: "1",
+      area: "HSR Layout",
+      totalRatingsString: "100+ ratings",
+      cloudinaryImageId: "6d57a1333281cb074256eb0934b1a2da",
+      cuisines: ["Pastas", "Pizzas", "Snacks", "Fast Food", "Chinese"],
+      tags: [],
+      costForTwo: 35000,
+      costForTwoString: "₹350 FOR TWO",
+      deliveryTime: 37,
+      minDeliveryTime: 37,
+      maxDeliveryTime: 37,
+      slaString: "37 MINS",
+      lastMileTravel: 5.599999904632568,
+      slugs: {
+        restaurant: "pasta-&-pizza-hsr-hsr",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "528a, 18th Main Rd, Sector 3, HSR Layout, Bengaluru, Karnataka 560102, India",
+      locality: "Sector-3",
+      parentId: 155951,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 1,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5.5 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "10% OFF",
+        subHeader: "ABOVE ₹1200",
+        discountTag: "FLAT DEAL",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "674334",
+        deliveryTime: 37,
+        minDeliveryTime: 37,
+        maxDeliveryTime: 37,
+        lastMileTravel: 5.599999904632568,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "IT_IS_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "3.2",
+      totalRatings: 100,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "660675",
+      name: "Cafe Amudham",
+      uuid: "748db01d-25af-41a8-b012-ce948960efcb",
+      city: "1",
+      area: "Koramangala",
+      totalRatingsString: "1000+ ratings",
+      cloudinaryImageId: "c4314ce3710e1cc462cef8d978a58ffc",
+      cuisines: ["South Indian"],
+      tags: [],
+      costForTwo: 20000,
+      costForTwoString: "₹200 FOR TWO",
+      deliveryTime: 29,
+      minDeliveryTime: 29,
+      maxDeliveryTime: 29,
+      slaString: "29 MINS",
+      lastMileTravel: 1,
+      slugs: {
+        restaurant: "cafe-amudham-koramangala-koramangala",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "No. 146, 5th Block, Koramangala, Bangalore, BTM Layout , B.B.M.P South, Karnataka-560095",
+      locality: "5th Block Kormangala",
+      parentId: 396620,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 2700,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 2700,
+        message: "",
+        title: "Delivery Charge",
+        amount: "2700",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "1 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+        subHeader: "UPTO ₹50",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "660675",
+        deliveryTime: 29,
+        minDeliveryTime: 29,
+        maxDeliveryTime: 29,
+        lastMileTravel: 1,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.5",
+      totalRatings: 1000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "367607",
+      name: "Bangalore Thindies",
+      uuid: "c59a4b7c-7838-4237-87e0-084f568fda2a",
+      city: "1",
+      area: "Indiranagar",
+      totalRatingsString: "1000+ ratings",
+      cloudinaryImageId: "hj8717bkny1hapwsvgqs",
+      cuisines: ["South Indian"],
+      tags: [],
+      costForTwo: 8000,
+      costForTwoString: "₹80 FOR TWO",
+      deliveryTime: 40,
+      minDeliveryTime: 40,
+      maxDeliveryTime: 40,
+      slaString: "40 MINS",
+      lastMileTravel: 5,
+      slugs: {
+        restaurant: "bangalore-thindies-indiranagar-indiranagar",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "1083, 12th Main Rd, HAL 2nd Stage, Doopanahalli, Indiranagar, Bengaluru, Karnataka 560075",
+      locality: "HAL 2nd Stage",
+      parentId: 20090,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      ribbon: [
+        {
+          type: "PROMOTED",
+        },
+      ],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID:
+        "cid=7495690~p=13~eid=00000189-5d1c-10ba-0f1b-20bd00e90d44~srvts=1689484267706",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "30% OFF",
+        subHeader: "UPTO ₹75",
+        discountTag: "",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "367607",
+        deliveryTime: 40,
+        minDeliveryTime: 40,
+        maxDeliveryTime: 40,
+        lastMileTravel: 5,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: true,
+      avgRating: "4.1",
+      totalRatings: 1000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "145076",
+      name: "Halli Jonne Biriyani",
+      uuid: "818bd70e-3640-4739-85ea-e79d4c333c75",
+      city: "1",
+      area: "Jayanagar",
+      totalRatingsString: "10000+ ratings",
+      cloudinaryImageId: "hukiflnai1hosydergnx",
+      cuisines: ["South Indian", "Biryani"],
+      tags: [],
+      costForTwo: 30000,
+      costForTwoString: "₹300 FOR TWO",
+      deliveryTime: 33,
+      minDeliveryTime: 33,
+      maxDeliveryTime: 33,
+      slaString: "33 MINS",
+      lastMileTravel: 6,
+      slugs: {
+        restaurant: "halli-jonne-biriyani-jayanagar",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "44, 4, 13th Main Rd, Opp BHS College, 4th T Block East, KV Layout, Jayanagar, Bengaluru, Karnataka 560011",
+      locality: "4th T Block",
+      parentId: 21321,
+      unserviceable: false,
+      veg: false,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 5100,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 5100,
+        message: "",
+        title: "Delivery Charge",
+        amount: "5100",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 1,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "6 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "10% OFF",
+        subHeader: "ABOVE ₹800",
+        discountTag: "FLAT DEAL",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "145076",
+        deliveryTime: 33,
+        minDeliveryTime: 33,
+        maxDeliveryTime: 33,
+        lastMileTravel: 6,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "IT_IS_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.3",
+      totalRatings: 10000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+  {
+    type: "restaurant",
+    data: {
+      type: "F",
+      id: "205813",
+      name: "Paakashala",
+      uuid: "dd78dfcb-9a64-47fe-aee9-ed82d09b70d7",
+      city: "1",
+      area: "MG Road",
+      totalRatingsString: "1000+ ratings",
+      cloudinaryImageId: "thkhqrsskc5745ztfz2v",
+      cuisines: ["South Indian", "North Indian", "Chinese"],
+      tags: [],
+      costForTwo: 50000,
+      costForTwoString: "₹500 FOR TWO",
+      deliveryTime: 31,
+      minDeliveryTime: 31,
+      maxDeliveryTime: 31,
+      slaString: "31 MINS",
+      lastMileTravel: 5.599999904632568,
+      slugs: {
+        restaurant: "paakashala-central-bangalore-central-bangalore",
+        city: "bangalore",
+      },
+      cityState: "1",
+      address:
+        "Paakashala @ MG Road, Mahatma Gandhi Road, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka, India",
+      locality: "MG Road",
+      parentId: 6959,
+      unserviceable: false,
+      veg: true,
+      select: false,
+      favorite: false,
+      tradeCampaignHeaders: [],
+      chain: [],
+      feeDetails: {
+        fees: [
+          {
+            name: "distance",
+            fee: 4500,
+            message: "",
+          },
+          {
+            name: "time",
+            fee: 0,
+            message: "",
+          },
+          {
+            name: "special",
+            fee: 0,
+            message: "",
+          },
+        ],
+        totalFees: 4500,
+        message: "",
+        title: "Delivery Charge",
+        amount: "4500",
+        icon: "",
+      },
+      availability: {
+        opened: true,
+        nextOpenMessage: "",
+        nextCloseMessage: "",
+      },
+      longDistanceEnabled: 0,
+      rainMode: "NONE",
+      thirdPartyAddress: false,
+      thirdPartyVendor: "",
+      adTrackingID: "",
+      badges: {
+        imageBased: [],
+        textBased: [],
+        textExtendedBadges: [],
+      },
+      lastMileTravelString: "5.5 kms",
+      hasSurge: false,
+      aggregatedDiscountInfoV3: {
+        header: "15% OFF",
+        subHeader: "ABOVE ₹700",
+        discountTag: "FLAT DEAL",
+        headerTypeV2: 0,
+      },
+      sla: {
+        restaurantId: "205813",
+        deliveryTime: 31,
+        minDeliveryTime: 31,
+        maxDeliveryTime: 31,
+        lastMileTravel: 5.599999904632568,
+        lastMileDistance: 0,
+        serviceability: "SERVICEABLE",
+        rainMode: "NONE",
+        longDistance: "NOT_LONG_DISTANCE",
+        preferentialService: false,
+        iconType: "EMPTY",
+      },
+      promoted: false,
+      avgRating: "4.3",
+      totalRatings: 1000,
+      new: false,
+    },
+    subtype: "basic",
+  },
+];
+
+
+//not using key (not acceptable) <<<<<<< index as key <<<<<<<<<<< unique id (best practice)
+const Body = () => {
+  return (
+    <div className="body">
+      <div className="search">Search</div>
+      <div className="res-container">
+
+        {resList.map((restaurant) => (
+          <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+        ))}
+
       </div>
-      <div id="conteriner2"></div>
-    </>
-    // </React.Fragment>
+    </div>
+  );
+};
+
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Body />
+    </div>
   );
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<HeadingComponent />);
+root.render(<AppLayout />);

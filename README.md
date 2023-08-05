@@ -18,3 +18,23 @@
   - Https
   - Tree Shaking - remove unused code
 
+  # Namaste Food
+  
+
+
+  Two types of Export/Import
+
+  -Default Export/Import
+
+  export default Component;
+  import Component from "path";
+
+  -Named Export/Import
+   export const Component;
+   import {Component} from "path";
+
+
+# React Hooks
+  (normal js utility function)
+  - useState() - (superpowerful State variable in react)
+  - useEffect() - ()

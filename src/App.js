@@ -40,8 +40,6 @@ what is virtual dom = virtual dom is representation of the actual dom.
 */
 
 const AppLayout = () => {
-  console.log(<Header />);
-  console.log(<Body />);
   return (
     <div className="app">
       <Header />

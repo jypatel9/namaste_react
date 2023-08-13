@@ -18,7 +18,7 @@
   "author": "Jay Desai",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.9.2",
+    "parcel": "^2.9.3",
     "process": "^0.11.10"
   },
   "dependencies": {

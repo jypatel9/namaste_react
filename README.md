@@ -38,3 +38,14 @@
   (normal js utility function)
   - useState() - (superpowerful State variable in react)
   - useEffect() - ()
+
+    // const arr = useState(resList);
+
+  // method -- 1
+  // const [listOfRestaurants, setListOfRestaurants] = arr;
+
+  // method -- 2
+  // const listOfRestaurants = arr[0]
+  // const setListOfRestaurants = arr[1]
+
+  // both are same either use this or use above one because of above one is very efficient that's why we better practice on this

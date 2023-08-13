@@ -1,35 +1,75 @@
 //not using key (not acceptable) <<<<<<< index as key <<<<<<<<<<< unique id (best practice)
 
 import RestaurantCard from "./RestaurantCard";
-import { useState } from "react";
-import resList from "../../Utils/MockData";
+import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  //local state variable - Super powerful variable
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
-// const arr = useState(resList);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
-// method -- 1
-// const [listOfRestaurants, setListOfRestaurants] = arr;
+  const [searchText, setSearchText] = useState("");
 
+  //whenever state variable changed or update, react will triggered the reconciliation cycle(re-renders the component).
 
- // method -- 2
-// const listOfRestaurants = arr[0]
-// const setListOfRestaurants = arr[1]
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-// both are same either use this or use above one because of above one is very efficient that's why we better practice on this
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
 
+    const json = await data.json();
 
+    setListOfRestaurants(
+      //Optional Chaining
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
 
-  return (
+    setFilteredRestaurants(
+      //Optional Chaining
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  };
+
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              //Filter the restaurant cards and update the UI
+
+              const filteredRestaurants = listOfRestaurants.filter((res) =>
+                res.info?.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+
+              setFilteredRestaurants(filteredRestaurants);
+            }}
+          >
+            Search
+          </button>
+        </div>
+
         <button
           className="filter-btn"
-
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (res) => res.data.avgRating > 4.2
+              (res) => res.info.avgRating > 4.0
             );
             setListOfRestaurants(filteredList);
           }}
@@ -38,8 +78,8 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.data.id} resData={restaurant} />
+        {filteredRestaurants.map((restaurant) => (
+          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
         ))}
       </div>
     </div>

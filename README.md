@@ -49,3 +49,18 @@
   // const setListOfRestaurants = arr[1]
 
   // both are same either use this or use above one because of above one is very efficient that's why we better practice on this
+
+
+# 2 types Routing in web apps
+  - client side routing
+  - server side routing
+
+#code-splitting
+   -break our components in small chunk
+   (synnomus words)
+      - chunking
+      - code splitting
+      - lazy loading
+      - dynamic bundeling
+      - on demand loading
+      - dynamic import

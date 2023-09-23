@@ -11,10 +11,17 @@ class About extends Component {
 
   render() {
     return (
-      <div>
-        <h1>About</h1>
-        <h2>This is Namaste React Web Series</h2>
-
+      <div className="flex px-20 py-5 m-4 p-4">
+        <UserClass
+          name={"Jay Desai"}
+          location={"Ahmedabad"}
+          contact={"@jy_patel9"}
+        />
+        <UserClass
+          name={"Jay Desai"}
+          location={"Ahmedabad"}
+          contact={"@jy_patel9"}
+        />
         <UserClass
           name={"Jay Desai"}
           location={"Ahmedabad"}

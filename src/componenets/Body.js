@@ -1,6 +1,6 @@
 //not using key (not acceptable) <<<<<<< index as key <<<<<<<<<<< unique id (best practice)
 
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -9,10 +9,11 @@ import useOnlineStatus from "../../Utils/useOnlineStatus";
 const Body = () => {
   //local state variable - Super powerful variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
-
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   console.log("calling" + listOfRestaurants);
   //whenever state variable changed or update, react will triggered the reconciliation cycle(re-renders the component).
@@ -97,12 +98,18 @@ const Body = () => {
         </div>
       </div>
       <div className="flex flex-wrap">
+        {console.log(filteredRestaurants)}
+
         {filteredRestaurants.map((restaurant) => (
           <Link
             key={restaurant?.info?.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.isOpen ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
